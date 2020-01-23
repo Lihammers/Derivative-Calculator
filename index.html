@@ -33,10 +33,27 @@
         .nav-tabs {
             margin-bottom: 0;
         }
+
+        #divider {
+            width: 3%;
+            height: auto;
+            display: inline-block;
+        }
+
+        #header {
+            background-color: #CFFFF8;
+            border-radius: 25px;
+            padding: 20px;
+        }
+
+        #centered {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <br>
+    <div class="container col-xl-11 col-lg-11 col-md-11 col-sm-11 col-sm-11" id="header">
         <div class="page-header">
             <h1>Derivative Calculator</h1>
         </div>
@@ -45,20 +62,25 @@
         <p>This program will calculate the derivative of a given polynomial.
         Use the x variable and enter the power of each variable by using "^".
         using any other variable other than x will give you an error.
-        <br>Note: This website is in its alpha stage, it will convert any
+        <br><b>Note</b>: This website is in its alpha stage, it will convert any
             fractions into decimals.</p>
-    </div>
-    <div class="container">
+
         <div class="input-group input-group-md">
             <input id="polynomial" type="text" class="form-control" placeholder="Enter polynomial">
+            <div id="divider"></div>
             <span class="input-group-btn">
                <button id="enter" class="btn btn-primary btn-md">Enter</button>
            </span>
         </div>
 
         <br>
-        <h3 id= "typed">f(x) = </h3>
-        <h3 id = "outputs"></h3>
+
+    </div>
+
+    <br>
+    <div class="container" id="centered">
+        <h2 id= "typed">f(x) = </h2>
+        <h2 id = "outputs"></h2>
     </div>
 </body>
 </html>
