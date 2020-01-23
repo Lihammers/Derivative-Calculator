@@ -89,6 +89,7 @@ function convertFractiontoDecimal(equation) {
 }
 
 function simplify(equation) {
+    equation = equation.replace(/X/g, "x");
     equation = equation.replace(/ /g,"");
     if (equation.charAt(0) === 'x')
         equation = "1" + equation;
