@@ -6,10 +6,8 @@ window.onload = function() {
 let eq = "";
 
 function clicked() {
-    let poly = $("polynomial");
     let output = $("outputs");
-    //output.innerHTML = "f'(x) = " + derive(eq);
-    let check = checkPolynomial(poly.value);
+    let check = checkPolynomial(eq);
     if (!check) {
         output.style.color = "red";
         output.innerHTML = "Error inproper input for polynomial";
@@ -21,7 +19,6 @@ function clicked() {
 }
 
 function checkPolynomial(string) {
-    string.replace(/ /,"");
 
     if (string.match(/[^+x0-9.\^-]/g) != null) {
         return false;
@@ -29,8 +26,8 @@ function checkPolynomial(string) {
     else if (string.match(/x[0-9.]/g) != null) {
         return false;
     }
-    else if ($("polynomial").value.match(/\/[\/*.^]+/g) != null) {
-
+    else if ($("polynomial").value.match(/[\/*.^][\/*.^]+/g) != null) {
+        return false;
     }
 
     return true;
@@ -89,8 +86,8 @@ function convertFractiontoDecimal(equation) {
 }
 
 function simplify(equation) {
-    equation = equation.replace(/X/g, "x");
     equation = equation.replace(/ /g,"");
+    equation = equation.replace(/X/g, "x");
     if (equation.charAt(0) === 'x')
         equation = "1" + equation;
     equation = equation.replace(/[+]x/g,"+1x");
@@ -216,7 +213,7 @@ function simplifyVariables(equation) {
 function onesAndZeroes(equation) {
     equation = equation.replace("x^0", "");
     equation = equation.replace("+-", "-");
-    equation = equation.replace(/0[-+]/g,"+");
+    equation = equation.replace(/0[+]/g,"+");
     if (equation.charAt(0) === '+')
         equation = equation.substr(1, equation.length);
 
@@ -267,9 +264,10 @@ function derive(equation) {
         else
             equation = equation.replace(variables[i], 0);
     }
-    //equation = addLikeTerms(equation);
+
     equation = onesAndZeroes(equation);
-    equation = convertExponents(equation);
+    if (equation.match(/[xX][\^][-]?[0-9]+([.][0-9]+)?/g) != null)
+        equation = convertExponents(equation);
 
     return equation;
 }
